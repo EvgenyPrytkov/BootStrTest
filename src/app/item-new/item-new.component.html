@@ -1,0 +1,70 @@
+<div #createForm>
+
+    <form [formGroup]="itemForm">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="docDate">Дата</label>
+            <div class="col-sm-9">
+                <input type="text" formControlName="docDate" class="form-control" id="docDate" placeholder="Дата">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="docName">Наименование</label>
+            <div class="col-sm-9">
+                <input type="text" style="font-weight: bold;" formControlName="docName" class="form-control" id="docName" placeholder="Наименование документа">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="docType">Тип документа</label>
+            <div class="col-sm-9">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" formControlName="docType">
+                    <option value="request">Запрос</option>
+                    <option value="certificate">Сертификат</option>
+                  </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="address">Адрес</label>
+            <div class="col-sm-9">
+                <input type="text" formControlName="address" class="form-control" id="address" placeholder="Адрес">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="status">Статус</label>
+            <div class="col-sm-9">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" formControlName="status">
+                    <option value="registred">Зарегестрирован</option>
+                    <option value="accepted">Принят</option>
+                  </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="isSpecial">Специальный?</label>
+            <div class="col-sm-9">
+                <input type="checkbox" formControlName="isSpecial" class="form-check-label" id="isSpecial">
+            </div>
+        </div>
+
+        <div formGroupName="author">
+            <h4>Автор:</h4>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="fio">ФИО</label>
+                <div class="col-sm-9">
+                    <input type="text" formControlName="fio" class="form-control" id="fio" placeholder="ФИО">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="post">Должность</label>
+                <div class="col-sm-9">
+                    <input type="text" formControlName="post" class="form-control" id="post" placeholder="Должность">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between">
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Отмена</button>
+            <button type="button" class="btn btn-danger" [disabled]="itemForm.invalid" (click)="save()">Сохранить</button>
+        </div>
+
+    </form>
+
+</div>

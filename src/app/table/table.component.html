@@ -1,0 +1,29 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col" sortable="docName" (sort)="onSort($event)">Наменование</th>
+            <th scope="col" sortable="docDate" (sort)="onSort($event)" style="width: 8em">Дата</th>
+            <th scope="col" sortable="address" (sort)="onSort($event)">Адрес</th>
+            <th scope="col" sortable="author.fio" (sort)="onSort($event)">Автор</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" (click)="onClickMe(item)">
+            <th scope="row" style="word-break: break-all;"><span>{{ item.docName }}</span></th>
+            <td>{{ item.docDate | date:"yyyy/MM/dd" }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.author?.fio }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>

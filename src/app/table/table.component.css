@@ -1,0 +1,7 @@
+th[scope="col"]:hover {
+    cursor: pointer;
+}
+
+tbody:hover {
+    cursor: default;
+}

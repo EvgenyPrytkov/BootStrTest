@@ -1,0 +1,58 @@
+<div class="card" *ngIf="item">
+    <div class="card-header">
+        <div class="d-flex align-items-center justify-content-between">
+            <h3 data-toggle="tooltip" data-placement="right" title="Код документа: {{ item.docCode }}" style="word-break: break-all;">
+                {{ item.docName }}
+            </h3>
+            {{ item.docDate | date:"dd.MM.yyyy" }}
+        </div>
+    </div>
+    <div class="card-body">
+        <div *ngIf="item.author">
+            <h5 class="card-title">{{ item.author.fio }}</h5>
+        </div>
+        <div *ngIf="item.author" class="d-flex justify-content-between">
+            <h6 class="card-subtitle mb-2 text-muted text-right">{{ item.author.post }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted text-right">{{ item.author.account }}</h6>
+        </div>
+        <p class="card-text">{{ item.address }}</p>
+
+        <div class="card-text">
+            Тип:
+            <div *ngIf="item.docType == 'request'; then requestBlock"></div>
+            <div *ngIf="item.docType == 'certificate'; then certificateBlock"></div>
+        </div>
+        <div class="card-text">
+            Статус:
+            <div *ngIf="item.status == 'registred'; then registredBlock"></div>
+            <div *ngIf="item.status == 'accepted'; then acceptedBlock"></div>
+        </div>
+
+        <p *ngIf="item.isSpecial" class="card-text" style="color: red;">Специальный</p>
+    </div>
+    <div class="card-footer text-right">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#editModalCenter">Редактировать</button>
+    </div>
+
+</div>
+
+<ng-template #requestBlock>Запрос</ng-template>
+
+<ng-template #certificateBlock>Сертификат</ng-template>
+
+<ng-template #registredBlock>Зарегестрирован</ng-template>
+
+<ng-template #acceptedBlock>Принят</ng-template>
+
+<div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Редактирование</h5>
+            </div>
+            <div class="modal-body">
+                <item-edit [item]="item" (itemChanged)="onItemChange($event)"></item-edit>
+            </div>
+        </div>
+    </div>
+</div>
